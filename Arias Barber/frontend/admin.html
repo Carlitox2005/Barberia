@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Administración - Arias Barber Studio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="brand">
+                <h2>GERENCIA</h2>
+                <span>Arias Barber Studio</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#dashboard" class="nav-item">Panel Financiero</a>
+                <a href="#citas" class="nav-item">Citas Pendientes</a>
+                <a href="#historial-citas" class="nav-item">Historial de Citas</a>
+                <a href="#usuarios" class="nav-item">Lista de Usuarios</a>
+                <a href="#barberos" class="nav-item">Gestión de Barberos</a>
+                <a href="#vista-catalogo" class="nav-item">Vista de Catálogo</a>
+                <a href="#catalogo" class="nav-item">Gestión de Catálogo</a>
+                <a href="#recompensas" class="nav-item">Gestión de Recompensas</a>
+                <a href="#horarios" class="nav-item">Control de Horarios</a>
+                <a href="#configuracion" class="nav-item">Configuración Global</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Panel de Control Administrativo</h1>
+                <div class="topbar-right">
+                    <button id="btn-toggle-theme" class="theme-toggle-btn" title="Cambiar Tema">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">A</div>
+                        <span>Cerrar Sesión</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-scroll">
+                <section id="dashboard" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Reporte de Ingresos</h2>
+                    </div>
+                    <div class="grid-cards">
+                        <div class="card">
+                            <h3>Ingresos del Día</h3>
+                            <span class="points">$0.00</span>
+                        </div>
+                        <div class="card">
+                            <h3>Ingresos de la Semana</h3>
+                            <span class="points">$0.00</span>
+                        </div>
+                        <div class="card">
+                            <h3>Ingresos del Mes</h3>
+                            <span class="points">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="form-card" style="margin-top: 2rem; margin-bottom: 2rem;">
+                        <div class="section-header" style="margin-bottom: 1.5rem;">
+                            <h2>Estadísticas de Ingresos (Últimos 7 días)</h2>
+                        </div>
+                        <div style="position: relative; height: 350px; width: 100%;">
+                            <canvas id="graficoIngresos"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="section-header" style="margin-top: 2rem;">
+                        <h2>Historial de Entradas de Dinero</h2>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; background: var(--bg-card); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); align-items: flex-end;">
+                        <div style="flex: 1; min-width: 250px;">
+                            <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">Buscar</label>
+                            <input type="text" id="filtro-texto-ingresos" placeholder="Cliente, barbero, servicio o monto..." style="width: 100%; padding: 0.7rem; border-radius: 6px; background: transparent; border: 1px solid var(--border-color); color: var(--text-main);">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">Fecha Inicio</label>
+                            <input type="date" id="filtro-fecha-inicio" style="padding: 0.7rem; border-radius: 6px; background: transparent; border: 1px solid var(--border-color); color: var(--text-main);">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">Fecha Fin</label>
+                            <input type="date" id="filtro-fecha-fin" style="padding: 0.7rem; border-radius: 6px; background: transparent; border: 1px solid var(--border-color); color: var(--text-main);">
+                        </div>
+                        <div>
+                            <button id="btn-exportar-pdf" class="btn-primary" style="padding: 0.75rem 1.5rem; background-color: #10b981; border: none; font-weight: bold; cursor: pointer; height: 100%;">Generar PDF</button>
+                        </div>
+                    </div>
+
+                    <div class="form-card">
+                        <div style="display: grid; grid-template-columns: 1.5fr 1.5fr 1.5fr 1fr 1.5fr; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-weight: 600;">
+                            <span>Cliente</span>
+                            <span>Servicio</span>
+                            <span>Barbero</span>
+                            <span>Monto</span>
+                            <span>Fecha y Hora</span>
+                        </div>
+                        <div id="lista-historial-ingresos" style="display: flex; flex-direction: column; gap: 1rem;">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="citas" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Citas Pendientes</h2>
+                    </div>
+                    <div class="form-card">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-weight: 600;">
+                            <span>Cliente</span>
+                            <span>Servicio</span>
+                            <span>Fecha y Hora</span>
+                            <span>Acción</span>
+                        </div>
+                        <div id="lista-citas-pendientes" style="display: flex; flex-direction: column; gap: 1rem;">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="historial-citas" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Historial Completo</h2>
+                    </div>
+                    <div class="form-card">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-weight: 600;">
+                            <span>Cliente</span>
+                            <span>Servicio</span>
+                            <span>Fecha y Hora</span>
+                            <span>Estado / Acción</span>
+                        </div>
+                        <div id="lista-citas-historial" style="display: flex; flex-direction: column; gap: 1rem;">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="usuarios" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Usuarios Registrados</h2>
+                    </div>
+                    <div style="margin-bottom: 1.5rem; background: var(--bg-card); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">Buscar Usuario</label>
+                        <input type="text" id="id-input-busqueda-usuarios" placeholder="Buscar por nombre, teléfono, email o rol..." style="width: 100%; padding: 0.7rem; border-radius: 6px; background: transparent; border: 1px solid var(--border-color); color: var(--text-main);">
+                    </div>
+                    <div class="form-card">
+                        <div style="display: grid; grid-template-columns: 0.8fr 1.2fr 1fr 1.5fr 1.2fr 0.8fr 1fr; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-weight: 600;">
+                            <span>Foto</span>
+                            <span>Nombre</span>
+                            <span>Teléfono</span>
+                            <span>Email</span>
+                            <span>Rol</span>
+                            <span style="text-align: center;">Puntos</span>
+                            <span>Acciones</span>
+                        </div>
+                        <div id="lista-usuarios" style="display: flex; flex-direction: column; gap: 1rem;">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="barberos" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Gestión de Barberos</h2>
+                        <p style="color: var(--text-muted);">Los perfiles se crean automáticamente al asignar el rol "Barbero" a un usuario. Aquí puedes completar sus datos personales.</p>
+                    </div>
+
+                    <!-- El formulario ahora está oculto y sirve solo para COMPLETAR DATOS -->
+                    <div class="form-card" id="contenedor-form-barbero" style="margin-bottom: 2rem; display: none; border-color: var(--accent-gold);">
+                        <h3 id="titulo-form-barbero" style="color: var(--accent-gold); margin-bottom: 1.5rem;">Completar Datos del Barbero</h3>
+                        <form id="form-nuevo-barbero" class="modern-form">
+                            <input type="hidden" id="barbero-id">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Nombre y Apellido (Desde el registro)</label>
+                                    <input type="text" id="barb-nombre" readonly style="opacity: 0.7; cursor: not-allowed;">
+                                </div>
+                                <div class="input-group">
+                                    <label>Teléfono</label>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <select id="barb-telefono-cod" style="width: 35%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-card); color: var(--text-main); outline: none;">
+                                            <option value="0412-">0412</option>
+                                            <option value="0414-">0414</option>
+                                            <option value="0422-">0422</option>
+                                            <option value="0424-">0424</option>
+                                            <option value="0416-">0416</option>
+                                            <option value="0426-">0426</option>
+                                        </select>
+                                        <input type="text" id="barb-telefono-num" maxlength="7" required style="width: 65%;">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Cédula de Identidad</label>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <select id="barb-cedula-tipo" style="width: 25%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-card); color: var(--text-main); outline: none;">
+                                            <option value="V-">V</option>
+                                            <option value="E-">E</option>
+                                        </select>
+                                        <input type="text" id="barb-cedula-num" maxlength="8" required placeholder="Ej: 12345678" style="width: 75%;">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Dirección</label>
+                                    <input type="text" id="barb-direccion" required placeholder="Ej: Av. Principal, Casa 12">
+                                </div>
+                                <div class="input-group" style="grid-column: 1 / -1;">
+                                    <label>Actualizar Foto (Opcional)</label>
+                                    <input type="file" id="barb-imagen" accept="image/*">
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <button type="submit" id="btn-submit-barbero" class="btn-primary">Guardar Cambios</button>
+                                <button type="button" onclick="ocultarFormBarbero()" class="btn-primary" style="background-color: transparent; border: 1px solid var(--border-color); color: var(--text-main);">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="form-card">
+                        <!-- Cabecera ajustada -->
+                        <div style="display: grid; grid-template-columns: 0.8fr 1.5fr 1.2fr 1.2fr 2fr 1fr; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-weight: 600;">
+                            <span>Foto</span>
+                            <span>Nombre</span>
+                            <span>Cédula</span>
+                            <span>Teléfono</span>
+                            <span>Dirección</span>
+                            <span>Acciones</span>
+                        </div>
+                        <div id="lista-barberos" style="display: flex; flex-direction: column; gap: 1rem;">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="vista-catalogo" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Catálogo Digital (Vista Cliente)</h2>
+                    </div>
+                    <div class="grid-cards" id="grid-vista-catalogo">
+                    </div>
+                </section>
+                
+                <section id="catalogo" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Servicios en el Catálogo</h2>
+                    </div>
+                    <div class="form-card" style="margin-bottom: 2rem;">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-weight: 600;">
+                            <span>Servicio</span>
+                            <span>Precio</span>
+                            <span>Duración</span>
+                            <span>Puntos</span>
+                            <span>Acciones</span>
+                        </div>
+                        <div id="lista-servicios" style="display: flex; flex-direction: column; gap: 1rem;">
+                        </div>
+                    </div>
+
+                    <div class="section-header">
+                        <h2 id="titulo-form-servicio">Agregar Nuevo Servicio</h2>
+                    </div>
+                    <div class="form-card">
+                        <form id="form-nuevo-servicio" class="modern-form">
+                            <input type="hidden" id="servicio-id">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Nombre del Servicio</label>
+                                    <input type="text" id="serv-nombre" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Precio ($)</label>
+                                    <input type="number" id="serv-precio" step="0.01" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Duración (Minutos)</label>
+                                    <input type="number" id="serv-duracion" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Puntos a Otorgar</label>
+                                    <input type="number" id="serv-puntos" required>
+                                </div>
+                                <div class="input-group" style="grid-column: 1 / -1;">
+                                    <label>Imagen del Servicio (Opcional si vas a editar)</label>
+                                    <input type="file" id="serv-imagen" accept="image/*">
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem;">
+                                <button type="submit" id="btn-submit-servicio" class="btn-primary">Guardar en Catálogo</button>
+                                <button type="button" id="btn-cancelar-servicio" class="btn-primary" style="background-color: transparent; border: 1px solid var(--border-color); color: var(--text-main); display: none;">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section id="recompensas" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Lista de Recompensas Activas</h2>
+                    </div>
+                    <div class="form-card" style="margin-bottom: 2rem;">
+                        <div style="display: grid; grid-template-columns: 1fr 2fr 1fr 3fr 1fr; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-weight: 600;">
+                            <span>Foto</span>
+                            <span>Nombre</span>
+                            <span>Costo (Pts)</span>
+                            <span>Descripción</span>
+                            <span>Acciones</span>
+                        </div>
+                        <div id="lista-admin-recompensas" style="display: flex; flex-direction: column; gap: 1rem;">
+                        </div>
+                    </div>
+
+                    <div class="section-header">
+                        <h2 id="titulo-form-recompensa">Agregar Nueva Recompensa</h2>
+                    </div>
+                    <div class="form-card">
+                        <form id="form-recompensa" class="modern-form">
+                            <input type="hidden" id="recompensa-id">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Nombre del Premio</label>
+                                    <input type="text" id="recompensa-nombre" required placeholder="Ej: Corte Gratis">
+                                </div>
+                                <div class="input-group">
+                                    <label>Puntos Requeridos</label>
+                                    <input type="number" id="recompensa-puntos" required min="1" placeholder="Ej: 50">
+                                </div>
+                                <div class="input-group" style="grid-column: 1 / -1;">
+                                    <label>Imagen del Premio (Opcional si vas a editar)</label>
+                                    <input type="file" id="recompensa-imagen" accept="image/*">
+                                </div>
+                            </div>
+                            <div class="input-group" style="margin-top: 1rem;">
+                                <label>Descripción</label>
+                                <textarea id="recompensa-descripcion" rows="2" required placeholder="Describe los detalles de la recompensa..."></textarea>
+                            </div>
+                            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                                <button type="submit" class="btn-primary" id="btn-guardar-recompensa">Guardar Recompensa</button>
+                                <button type="button" class="btn-primary" id="btn-cancelar-recompensa" style="display: none; background: transparent; border: 1px solid var(--border-color); color: var(--text-main);">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section id="horarios" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Gestión de Horarios por Barbero</h2>
+                    </div>
+                    <div class="form-card" style="margin-bottom: 2rem;">
+                        <div class="input-group">
+                            <label>Seleccionar Barbero</label>
+                            <select id="horario-select-barbero" style="width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-card); color: var(--text-main); outline: none;">
+                                <option value="" disabled selected>Seleccione un barbero...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-card" style="margin-bottom: 2rem;">
+                        <h3>Asignar Turno Laboral</h3>
+                        <form id="form-nuevo-horario" class="modern-form">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Día de la Semana</label>
+                                    <select id="horario-dia" required style="width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-card); color: var(--text-main); outline: none;">
+                                        <option value="" disabled selected>Seleccionar...</option>
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miércoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Sábado">Sábado</option>
+                                        <option value="Domingo">Domingo</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Hora de Apertura</label>
+                                    <input type="time" id="horario-apertura" required value="08:00">
+                                </div>
+                                <div class="input-group">
+                                    <label>Hora de Cierre</label>
+                                    <input type="time" id="horario-cierre" required value="18:00">
+                                </div>
+                            </div>
+                            <div style="margin-top: 1.5rem;">
+                                <button type="submit" class="btn-primary">Guardar Turno</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="form-card">
+                        <h3>Turnos Asignados</h3>
+                        <div style="display: grid; grid-template-columns: 2fr 2fr 2fr 1fr; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-weight: 600;">
+                            <span>Día</span>
+                            <span>Apertura</span>
+                            <span>Cierre</span>
+                            <span>Acciones</span>
+                        </div>
+                        <div id="lista-horarios-barbero" style="display: flex; flex-direction: column; gap: 1rem;">
+                            <p style="color: var(--text-muted);">Seleccione un barbero arriba para ver sus horarios.</p>
+                        </div>
+                    </div>
+                </section>
+
+               <section id="configuracion" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Configuración General del Negocio</h2>
+                    </div>
+                    <div class="form-card">
+                        <form id="form-configuracion" class="modern-form" enctype="multipart/form-data">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Nombre de la Barbería</label>
+                                    <input type="text" id="conf-nombre" required placeholder="Arias Barber Studio">
+                                </div>
+                                <div class="input-group">
+                                    <label>Tiempo de Tolerancia de Cita (Minutos)</label>
+                                    <input type="number" id="conf-tolerancia" required min="0" value="15">
+                                </div>
+                                <div class="input-group">
+                                    <label>Tema del Sistema</label>
+                                    <select id="conf-tema" style="width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-card); color: var(--text-main); outline: none;">
+                                        <option value="claro">Minimalista (Blanco y Negro)</option>
+                                        <option value="oscuro">Clásico (Oscuro y Dorado)</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Logo de la Barbería (Opcional)</label>
+                                    <input type="file" id="conf-logo" accept="image/*">
+                                </div>
+                            </div>
+                            <div class="input-group" style="margin-top: 1rem;">
+                                <label>Mensaje de Bienvenida</label>
+                                <textarea id="conf-mensaje" rows="3" required placeholder="Estilismo de alta calidad..."></textarea>
+                            </div>
+                            <div style="margin-top: 1.5rem;">
+                                <button type="submit" class="btn-primary">Guardar Configuración</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==========================================
+         MODAL DE CAJA (MÉTODOS DE PAGO)
+    =========================================== -->
+    <div id="modal-pago" class="modal-overlay" style="z-index: 9999;">
+        <div class="modal-content" style="max-width: 400px; background: var(--bg-panel);">
+            <span class="close-modal" onclick="cerrarModalPago()">&times;</span>
+            <div class="section-header" style="text-align: center; margin-bottom: 1.5rem;">
+                <h2 style="color: var(--accent-gold); margin:0;">Cerrar Caja</h2>
+                <p style="color: var(--text-muted); margin-top: 0.2rem;">Registra el pago del cliente</p>
+            </div>
+            <form id="form-pago-cita" class="modern-form">
+                <!-- Data oculta -->
+                <input type="hidden" id="pago-cita-id">
+                <input type="hidden" id="pago-cliente-id">
+                <input type="hidden" id="pago-puntos">
+                
+                <div class="input-group">
+                    <label>Método de Pago</label>
+                    <select id="pago-metodo" required style="border: 1px solid var(--border-color);">
+                        <option value="" disabled selected>Selecciona un método...</option>
+                        <option value="Pago Móvil">📱 Pago Móvil</option>
+                        <option value="Zelle">💵 Zelle</option>
+                        <option value="Efectivo Divisas">💵 Efectivo (Divisas)</option>
+                        <option value="Efectivo VES">🇻🇪 Efectivo (Bolívares)</option>
+                        <option value="Punto de Venta">💳 Punto de Venta</option>
+                        <option value="Canje de Puntos">🏆 Canje por Puntos VIP</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>N° Referencia (Opcional)</label>
+                    <input type="text" id="pago-referencia" placeholder="Ej: 001234567" style="border: 1px solid var(--border-color);">
+                </div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">Confirmar y Completar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- LIBRERÍAS EXTERNAS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- 🟢 CONFIGURACIÓN GLOBAL -->
+    <script src="js/config.js"></script>
+
+    <!-- SCRIPTS PROPIOS -->
+    <script src="js/admin_core.js"></script>
+    <script src="js/admin_dashboard.js"></script>
+    <script src="js/admin_finanzas.js"></script>
+    <script src="js/admin_barberos.js"></script>
+    <script src="js/admin_servicios.js"></script>
+    <script src="js/admin_recompensas.js"></script>
+    <script src="js/admin_horarios.js"></script>
+    <script src="js/admin_configuracion.js"></script>
+</body>
+</html>

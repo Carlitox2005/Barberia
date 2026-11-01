@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arias Barber Studio - Estilismo Premium</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="landing-body">
+
+    <!-- NAVBAR -->
+    <nav class="landing-nav">
+        <div class="brand" style="margin: 0;">
+            <h2 style="margin: 0; line-height: 1;">ABS</h2>
+            <span style="font-size: 0.7rem;">Barber Studio</span>
+        </div>
+        <div class="landing-nav-links">
+            <button type="button" onclick="abrirModal('modal-login')" class="btn-primary" style="background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold);">Ingresar</button>
+            <button type="button" onclick="abrirModal('modal-registro')" class="btn-primary">Registrarse</button>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION -->
+    <header class="landing-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-landing">
+            <h1>Tu Estilo,<br><span style="color: var(--accent-gold);">Nuestra Obra Maestra</span></h1>
+            <p>Descubre la verdadera barbería de alta gama. Un espacio diseñado para el hombre moderno que valora su imagen, su tiempo y un servicio de excelencia.</p>
+            <button type="button" onclick="abrirModal('modal-registro')" class="btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem; box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3); text-transform: uppercase; letter-spacing: 1px;">Reserva tu Cita</button>
+        </div>
+    </header>
+
+    <!-- 2. CARACTERÍSTICAS -->
+    <section class="landing-features">
+        <div class="feature-card-landing">
+            <div class="feature-icon">✂️</div>
+            <h3 style="color: var(--accent-gold); margin-bottom: 0.5rem;">Cortes Premium</h3>
+            <p style="color: #cbd5e1; font-size: 0.95rem;">Maestros barberos capacitados en las últimas tendencias urbanas y técnicas clásicas europeas.</p>
+        </div>
+        <div class="feature-card-landing">
+            <div class="feature-icon">⏱️</div>
+            <h3 style="color: var(--accent-gold); margin-bottom: 0.5rem;">Cero Esperas</h3>
+            <p style="color: #cbd5e1; font-size: 0.95rem;">Nuestro sistema inteligente de agendamiento bloquea tu turno exclusivo. Llegas y te sientas.</p>
+        </div>
+        <div class="feature-card-landing">
+            <div class="feature-icon">🏆</div>
+            <h3 style="color: var(--accent-gold); margin-bottom: 0.5rem;">Club VIP</h3>
+            <p style="color: #cbd5e1; font-size: 0.95rem;">Gana puntos de fidelidad con cada servicio y canjéalos directamente por cortes o productos gratis.</p>
+        </div>
+    </section>
+
+    <!-- 3. SERVICIOS DESTACADOS -->
+    <section class="landing-section alt-bg">
+        <div class="section-title-landing">
+            <h2>Nuestros Servicios</h2>
+            <p>Más que un corte de cabello, te ofrecemos un ritual de cuidado personal diseñado para potenciar tu mejor versión.</p>
+        </div>
+        <div class="services-preview-grid">
+            <div class="service-preview-card">
+                <div class="service-preview-img" style="background-image: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="service-preview-info">
+                    <h3>Corte Clásico / Fade</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">Asesoría de imagen, corte a tijera o máquina con degradado perfecto y peinado final.</p>
+                    <span class="service-price">Desde $5.00</span>
+                </div>
+            </div>
+            <div class="service-preview-card">
+                <div class="service-preview-img" style="background-image: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="service-preview-info">
+                    <h3>Perfilado de Barba VIP</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">Ritual con toalla caliente, vapor ozono, perfilado a navaja y aplicación de aceites esenciales.</p>
+                    <span class="service-price">Desde $4.00</span>
+                </div>
+            </div>
+            <div class="service-preview-card">
+                <div class="service-preview-img" style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="service-preview-info">
+                    <h3>Servicio Premium ABS</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">Corte + Barba + Masaje Facial + Exfoliación profunda. El tratamiento de reyes completo.</p>
+                    <span class="service-price">Desde $10.00</span>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <button type="button" onclick="abrirModal('modal-registro')" class="btn-primary" style="background: transparent; border: 2px solid var(--accent-gold); color: var(--accent-gold);">Ver Catálogo Completo</button>
+        </div>
+    </section>
+
+    <!-- 4. TESTIMONIOS -->
+    <section class="landing-section">
+        <div class="section-title-landing">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <p>La satisfacción de quienes se sientan en nuestras sillas es nuestra mejor tarjeta de presentación.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p style="color: #cbd5e1; font-style: italic; margin-bottom: 1rem;">"El sistema de reservas es increíble. Desde que uso la app nunca más he tenido que esperar sentado. Llego a mi hora y me atienden de una vez. El corte impecable como siempre."</p>
+                <h4 style="color: var(--accent-gold);">— Carlos T.</h4>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p style="color: #cbd5e1; font-style: italic; margin-bottom: 1rem;">"La atención al detalle en la barba con toalla caliente no tiene comparación. Además, acabo de canjear mis puntos por un corte gratis. 100% recomendados."</p>
+                <h4 style="color: var(--accent-gold);">— Eduardo M.</h4>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p style="color: #cbd5e1; font-style: italic; margin-bottom: 1rem;">"El ambiente de la barbería es de primera, buena música, excelente trato y los barberos de verdad saben lo que hacen. El mejor Fade de la ciudad sin duda."</p>
+                <h4 style="color: var(--accent-gold);">— Miguel A.</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. UBICACIÓN Y CONTACTO -->
+    <section class="landing-section alt-bg">
+        <div class="section-title-landing">
+            <h2>Visítanos</h2>
+            <p>Agenda tu cita por el sistema y ven a disfrutar de la experiencia.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <h3 style="color: white; margin-bottom: 0.5rem;">Ubicación</h3>
+                <p style="color: #94a3b8;">Los Guayos, Estado Carabobo<br>Venezuela</p>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">🕒</div>
+                <h3 style="color: white; margin-bottom: 0.5rem;">Horario de Atención</h3>
+                <p style="color: #94a3b8;">Lunes a Sábado<br>08:00 AM - 06:00 PM</p>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <h3 style="color: white; margin-bottom: 0.5rem;">Contacto</h3>
+                <p style="color: #94a3b8;">Soporte por WhatsApp<br>Reserva exclusiva vía Web</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="landing-footer">
+        <h2 style="color: var(--accent-gold); margin-bottom: 1rem;">Arias Barber Studio</h2>
+        <p>&copy; 2026 Todos los derechos reservados. Desarrollado con excelencia.</p>
+    </footer>
+
+    <!-- ==========================================
+         MODALES DE AUTENTICACIÓN (VENTANAS)
+    =========================================== -->
+
+    <!-- MODAL: INICIAR SESIÓN -->
+    <div id="modal-login" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="cerrarModal('modal-login')">&times;</span>
+            <div class="section-header" style="text-align: center; margin-bottom: 1.5rem;">
+                <h2 style="color: var(--accent-gold); margin:0;">Bienvenido</h2>
+                <p style="color: var(--text-muted); margin-top: 0.2rem;">Inicia sesión para continuar</p>
+            </div>
+            <form id="form-login" class="modern-form">
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="email" required style="background: rgba(15,23,42,0.5); color: white;">
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="password" required style="background: rgba(15,23,42,0.5); color: white;">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">Ingresar a mi cuenta</button>
+                <div style="text-align: center; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                    <!-- Nótese el event.preventDefault() para que la pantalla no salte -->
+                    <a href="#" onclick="event.preventDefault(); cambiarModal('modal-login', 'modal-recuperar')" style="color: var(--accent-gold); text-decoration: none; font-size: 0.9rem;">¿Olvidaste tu contraseña?</a>
+                    <a href="#" onclick="event.preventDefault(); cambiarModal('modal-login', 'modal-registro')" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">¿No tienes cuenta? <strong style="color: white;">Regístrate gratis</strong></a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: REGISTRO -->
+    <div id="modal-registro" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-modal" onclick="cerrarModal('modal-registro')">&times;</span>
+            <div class="section-header" style="text-align: center; margin-bottom: 1.5rem;">
+                <h2 style="color: var(--accent-gold); margin:0;">Únete al Club</h2>
+                <p style="color: var(--text-muted); margin-top: 0.2rem;">Crea tu cuenta en segundos</p>
+            </div>
+            <form id="form-registro" class="modern-form">
+                <div class="input-group">
+                    <label>Nombre y Apellido</label>
+                    <input type="text" id="reg-nombre" required style="background: rgba(15,23,42,0.5); color: white;">
+                </div>
+                <div class="input-group">
+                    <label>Teléfono</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <select id="reg-telefono-cod" style="width: 35%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background-color: rgba(15,23,42,0.5); color: white; outline: none;">
+                            <option value="0412-">0412</option>
+                            <option value="0414-">0414</option>
+                            <option value="0422-">0422</option>
+                            <option value="0424-">0424</option>
+                            <option value="0416-">0416</option>
+                            <option value="0426-">0426</option>
+                        </select>
+                        <input type="text" id="reg-telefono-num" maxlength="7" placeholder="1234567" required style="width: 65%; background: rgba(15,23,42,0.5); color: white;">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="reg-email" required style="background: rgba(15,23,42,0.5); color: white;">
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="reg-password" required minlength="6" style="background: rgba(15,23,42,0.5); color: white;">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">Crear mi cuenta</button>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a href="#" onclick="event.preventDefault(); cambiarModal('modal-registro', 'modal-login')" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">¿Ya tienes cuenta? <strong style="color: var(--accent-gold);">Inicia sesión aquí</strong></a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: RECUPERAR CONTRASEÑA -->
+    <div id="modal-recuperar" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="cerrarModal('modal-recuperar')">&times;</span>
+            <div class="section-header" style="text-align: center; margin-bottom: 1.5rem;">
+                <h2 style="color: var(--accent-gold); margin:0;">Recuperar Acceso</h2>
+                <p style="color: var(--text-muted); margin-top: 0.2rem;">Te enviaremos un enlace a tu correo</p>
+            </div>
+            <form id="form-recuperar" class="modern-form">
+                <div class="input-group">
+                    <label>Correo Electrónico Registrado</label>
+                    <input type="email" id="rec-email" required style="background: rgba(15,23,42,0.5); color: white;">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">Enviar Enlace</button>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a href="#" onclick="event.preventDefault(); cambiarModal('modal-recuperar', 'modal-login')" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Volver al <strong style="color: white;">Inicio de sesión</strong></a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lógica visual de las ventanas -->
+    <script>
+        function abrirModal(id) { document.getElementById(id).classList.add('active'); }
+        function cerrarModal(id) { document.getElementById(id).classList.remove('active'); }
+        function cambiarModal(cerrarId, abrirId) {
+            cerrarModal(cerrarId);
+            setTimeout(() => abrirModal(abrirId), 300);
+        }
+    </script>
+
+    <!-- Archivos del Sistema -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

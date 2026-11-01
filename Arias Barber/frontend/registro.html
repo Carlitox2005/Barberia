@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Arias Barber Studio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div class="form-card" style="width: 100%; max-width: 400px;">
+        <div class="section-header" style="text-align: center;">
+            <h2 style="color: var(--accent-gold);">Crear Cuenta</h2>
+            <p style="color: var(--text-muted);">Únete a Arias Barber Studio</p>
+        </div>
+        <form id="form-registro" class="modern-form">
+            <div class="input-group">
+                <label>Nombre y Apellido</label>
+                <input type="text" id="reg-nombre" required>
+            </div>
+            <div class="input-group">
+                <label>Teléfono</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <select id="reg-telefono-cod" style="width: 35%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background-color: #1e1e2f; color: #ffffff; outline: none;">
+                        <option value="0412-">0412</option>
+                        <option value="0414-">0414</option>
+                        <option value="0422-">0422</option>
+                        <option value="0424-">0424</option>
+                        <option value="0416-">0416</option>
+                        <option value="0426-">0426</option>
+                    </select>
+                    <input type="text" id="reg-telefono-num" maxlength="7" placeholder="1234567" required style="width: 65%;">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Correo Electrónico</label>
+                <input type="email" id="reg-email" required>
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" id="reg-password" required>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%;">Registrarse</button>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">¿Ya tienes cuenta? Inicia sesión aquí</a>
+            </div>
+        </form>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>
